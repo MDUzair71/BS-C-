@@ -1,0 +1,53 @@
+//QUICK SORTING
+
+#include<iostream>
+using namespace std;
+void swap(int *first, int *second){
+	int temp = *first;
+	*first = *second;
+	*second = temp ;
+}
+int partition(int array[], int low, int high){
+	int piovet = array[high];
+	int i=low - 1;
+	for(int j = low; j < high; j++){
+		
+		if(array[j] <= piovet){
+			i++;
+			swap(&array[i], &array[j]);
+		}
+	}
+	swap(&array[i + 1], &array[high]);
+	return i + 1;
+}
+void quicksort(int array[], int low, int high){
+
+	if(low < high){
+		int pi = partition(array, low, high);
+		cout<<endl;
+		//cout<<"(array,"<<low<<" ,"<<pi-1<<")";
+		cout<<endl;
+		    quicksort(array, low, pi-1);
+		    quicksort(array, pi+1, high);
+	}
+}
+using namespace std;
+int main(){
+	
+	int array[] = {8,11, 9, 4, 3, 7};
+	int size= sizeof(array)/ sizeof (array[0]);
+	cout << "Before Sorting: ";
+	for(int i = 0; i < size; i++){
+		cout<<array[i]<<"  ";
+	}
+	int low = 0;
+	int high = size - 1;
+	quicksort(array, low, high);{
+		cout << "After Sorting: ";
+		for(int i = 0; i < size; i++){
+			cout << array[i] <<"  ";
+		}
+	}
+	return 0;
+}
+
